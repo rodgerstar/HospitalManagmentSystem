@@ -54,7 +54,7 @@ class Appointment(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.patient} with {self.doctor} on {self.date} at {self.time}"
+        return f"{self.patient} on {self.date} at {self.time}"
 
     class Meta:
         verbose_name = 'Appointment'

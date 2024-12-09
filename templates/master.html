@@ -64,7 +64,7 @@
                 </div>
                 <!-- Details Container -->
                 <div class="sidebar-user-details">
-                    <div class="user-name fw-bold text-white mb-1"> <span>Dr. Merciline Shikuku </span> </div>
+                    <div class="user-name fw-bold text-white mb-1"><span>Dr. Merciline Shikuku </span></div>
                     <div class="user-role  small text-white"><span>Administrator</span></div>
                 </div>
             </div>
@@ -99,11 +99,17 @@
 
         <hr class="sidebar-divider my-0">
 
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'patient_detail' %}">
-                <i class="fas fa-fw fa-notes-medical"></i>
-                <span>Patients Details</span></a>
-        </li>
+        <ul class="nav">
+            {% for patient in patients %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'patient_detail' patient.id %}">
+                        <i class="fas fa-fw fa-notes-medical"></i>
+                        <span>{{ patient.name }} Details</span>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+
 
         <hr class="sidebar-divider my-0">
 

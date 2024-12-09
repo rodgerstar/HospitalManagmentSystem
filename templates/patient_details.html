@@ -1,0 +1,71 @@
+{% extends 'master.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Patient Details</title>
+{% endblock %}
+
+{% block content %}
+<div class="container my-4 border rounded p-3">
+    <h3 class="text-center">Patient Personal Info:</h3>
+
+    <!-- Patient Details Section -->
+    {% if patient %}
+        <div class="row gy-4">
+            <div class="col-md-6">
+                <table class="table table-striped">
+                    <tr>
+                        <td class="h6">First Name</td>
+                        <td class="text-dark">{{ patient.first_name }}</td>
+                    </tr>
+                    <tr>
+                        <td class="h6">Last Name</td>
+                        <td>{{ patient.last_name }}</td>
+                    </tr>
+                    <tr>
+                        <td class="h6">Phone Number</td>
+                        <td>{{ patient.phone_number }}</td>
+                    </tr>
+                    <tr>
+                        <td class="h6">Date Of Birth</td>
+                        <td>{{ patient.dob | date:"d-M-Y" }}</td>
+                    </tr>
+                    <tr>
+                        <td class="h6">Address</td>
+                        <td>{{ patient.address }}</td>
+                    </tr>
+                    <tr>
+                        <td class="h6">Diagnosis</td>
+                        <td>{{ patient.diagnosis }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    {% else %}
+        <p class="text-danger text-center">No patient data available.</p>
+    {% endif %}
+
+    <!-- Patients List Section -->
+    {% if patients %}
+        <h4 class="mt-5">All Patients:</h4>
+        <table class="table table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for patient in patients %}
+                    <tr>
+                        <td>{{ patient.name }}</td>
+                        <td>
+                            <a href="{% url 'patient_detail' patient.id %}" class="btn btn-outline-info btn-sm">View</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+</div>
+{% endblock %}
