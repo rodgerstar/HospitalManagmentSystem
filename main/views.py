@@ -1,16 +1,21 @@
 from django.shortcuts import render
 
+from main.models import Patient, Doctor
+
+
 # Create your views here.
 def dashboard(request):
     return render(request, 'dashboard.html')
 
 
 def patients(request):
-    return render(request, 'patients.html')
+    data = Patient.objects.all()
+    return render(request, 'patients.html', {'data': data})
 
 
 def doctors(request):
-    return render(request, 'doctors.html')
+    medics = Doctor.objects.all()
+    return render(request, 'doctors.html', {"medics": medics})
 
 
 def patient_detail(request):

@@ -1,9 +1,81 @@
 {% extends 'master.html' %}
+{% load static %}
 
 {% block title %}
-	<title>Doctors</title>
+    <title>Doctors</title>
+{% endblock %}
+
+{% block extra_css %}
+    <link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet' %}">
 {% endblock %}
 
 {% block content %}
-	DASHBOARD
+    <h1 class="h3 mb-2 text-gray-800">Doctors</h1>
+    <p class="mb-4">Doctors Data</p>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">You can view doctors</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>First name</th>
+                        <th>Last name</th>
+                        <th>Gender</th>
+                        <th>Email</th>
+                        <th>Department</th>
+                        <th>reg_num</th>
+                        <th>Add Medic</th>
+                        <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th>First name</th>
+                        <th>Last name</th>
+                        <th>Gender</th>
+                        <th>Email</th>
+                        <th>Department</th>
+                        <th>reg_num</th>
+                        <th>Add Medic</th>
+                        <th>Delete</th>
+                    </tr>
+                    </tfoot>
+                    <tbody>
+                        {% for medic in medics %}
+                        	<tr>
+                                <td>{{ medic.first_name }}</td>
+                                <td>{{ medic.last_name }}</td>
+                                <td>{{ medic.gender }}</td>
+                                <td>{{ medic.email }}</td>
+                                <td>{{ medic.department }}</td>
+                                <td>{{ medic.med_reg_num}}</td>
+                                <td>
+                                    <a href="#" class="btn btn-outline-info btn-sm">Add Medic</a>
+                                </td>
+                                <td>
+                                    <a href="#" class="btn btn-outline-danger btn-sm">Delete</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block extra_js %}
+    <!-- Page level plugins -->
+    <script src="{% static 'vendor/datatables/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{% static 'js/demo/datatables-demo.js' %}"></script>
 {% endblock %}

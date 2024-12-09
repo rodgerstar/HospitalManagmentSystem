@@ -47,7 +47,6 @@ class Doctor(models.Model):
 
 class Appointment(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
-    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     date = models.DateField()
     time = models.TimeField()
     status = models.CharField(max_length=20, choices=[('Scheduled', 'Scheduled'), ('Completed', 'Completed')])
@@ -83,6 +82,7 @@ class MedicalRecord(models.Model):
 class Invoice(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     amount = models.IntegerField()
+    description = models.TextField()
     status = models.CharField(max_length=20, choices=[('Paid', 'Paid'), ('Unpaid', 'Unpaid')])
     merchant_request_id = models.CharField(max_length=100)
     checkout_request_id = models.CharField(max_length=100)
