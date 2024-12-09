@@ -17,6 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from main import views
+
 urlpatterns = [
+    path('', views.dashboard, name='dashboard'),
+    path('doctors', views.doctors, name='doctors'),
+    path('patients', views.patients, name='patients'),
+    path('add/patient', views.add_patient, name='add_patient'),
+    path('patient-details', views.patient_detail, name='patient_detail'),
     path('admin/', admin.site.urls),
 ]

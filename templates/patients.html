@@ -1,0 +1,22 @@
+{% extends 'master.html' %}
+
+{% block title %}
+	<title>Patients</title>
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+        <h2>Patients</h2>
+        <table>
+            <tr>
+                <th>Patient ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Gender</th>
+                <th>Adm date</th>
+                <th>address</th>
+            </tr>
+            {% for patient in patients %}
+        </table>
+    </div>
+{% endblock %}
