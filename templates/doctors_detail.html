@@ -2,41 +2,45 @@
 {% load static %}
 
 {% block title %}
-    <title>Patient Details</title>
+    <title>Doctors Details</title>
 {% endblock %}
 
 {% block content %}
 <div class="container my-4 border rounded p-3">
-    <h3 class="text-primary">Patient Personal Info:</h3>
+    <h3 class="text-primary">Doctor's Personal Info:</h3>
 
     <!-- Patient Details Section -->
-    {% if patient %}
+    {% if doctor %}
         <div class="row gy-4">
             <div class="col-md-6">
                 <table class="table table-striped">
                     <tr>
                         <td class="h6">First Name</td>
-                        <td class="text-dark">{{ patient.first_name }}</td>
+                        <td class="text-dark">{{ doctor.first_name }}</td>
                     </tr>
                     <tr>
                         <td class="h6">Last Name</td>
-                        <td>{{ patient.last_name }}</td>
+                        <td>{{ doctor.last_name }}</td>
                     </tr>
                     <tr>
                         <td class="h6">Phone Number</td>
-                        <td>{{ patient.phone_number }}</td>
+                        <td>{{ doctor.email }}</td>
                     </tr>
                     <tr>
-                        <td class="h6">Date Of Birth</td>
-                        <td>{{ patient.dob | date:"d-M-Y" }}</td>
+                        <td class="h6">Gender</td>
+                        <td>{{ doctor.gender }}</td>
                     </tr>
                     <tr>
                         <td class="h6">Address</td>
-                        <td>{{ patient.address }}</td>
+                        <td>{{ doctor.department }}</td>
                     </tr>
                     <tr>
-                        <td class="h6">Diagnosis</td>
-                        <td>{{ patient.diagnosis }}</td>
+                        <td class="h6">Reg. No/td>
+                        <td>{{ doctor.med_reg_num }}</td>
+                    </tr>
+                     <tr>
+                        <td class="h6">Phone number</td>
+                        <td>{{ doctor.phone_number }}</td>
                     </tr>
                 </table>
             </div>
@@ -46,8 +50,8 @@
     {% endif %}
 
     <!-- Patients List Section -->
-    {% if patients %}
-{#        <h4 class="mt-5">All Patients:</h4>#}
+    {% if doctor %}
+{#        <h4 class="mt-5">All Doctors:</h4>#}
 {#        <table class="table table-bordered mt-3">#}
 {#            <thead>#}
 {#                <tr>#}
@@ -56,11 +60,11 @@
 {#                </tr>#}
 {#            </thead>#}
             <tbody>
-                {% for patient in patients %}
+                {% for doctor in doctors %}
                     <tr>
-                        <td>{{ patient.name }}</td>
+                        <td>{{ doctor.name }}</td>
                         <td>
-                            <a href="{% url 'patient_detail' patient.id %}" class="btn btn-outline-info btn-sm">View</a>
+                            <a href="{% url 'doctor_detail' doctor.id %}" class="btn btn-outline-info btn-sm">View</a>
                         </td>
                     </tr>
                 {% endfor %}

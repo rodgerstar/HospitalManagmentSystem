@@ -37,7 +37,7 @@ class Doctor(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name} {self.email}"
+        return f"{self.med_reg_num}-{self.first_name} {self.last_name}"
 
     class Meta:
         verbose_name = 'Doctor'
@@ -107,6 +107,7 @@ class Department(models.Model):
         related_name="departments"  # Unique reverse relation
     )
     age = models.IntegerField()
+    email = models.EmailField(unique=True, null=True, blank=True)
     qualifications = models.TextField(blank=True)  # Changed capitalization
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

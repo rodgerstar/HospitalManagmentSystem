@@ -40,3 +40,8 @@ def add_doctor(request):
 
 def delete_doctor(request, doctor_id):
     return None
+
+
+def doctor_detail(request, doctor_id):
+    doctor = get_object_or_404(Doctor, id=doctor_id)
+    return render(request, 'doctors_detail.html', {'doctor':doctor})
