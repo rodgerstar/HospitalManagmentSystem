@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-    <title>Add Patient</title>
+    <title>Add Medic</title>
 {% endblock %}
 
 {% block content %}
@@ -10,16 +10,16 @@
         <div class="row justify-content-center">
             <div class="col-sm-4">
                 <div class="card border-primary mb-3 p-3 shadow-sm">
-                    <h3 class="text-center text-primary">Add New Patient</h3>
+                    <h3 class="text-center text-primary">Add New Medic Personnel</h3>
                     {% if form.errors %}
                         <div class="alert alert-danger">
                             Please correct the errors below.
                         </div>
                     {% endif %}
-                    <form action="{% url 'add_patient' %}" method="POST">
+                    <form action="{% url 'add_doctor' %}" method="POST">
                         {% csrf_token %}
                         {{ form | crispy }}
-                        <button class="btn btn-outline-primary" aria-label="Save Patient">Save Patient</button>
+                        <button class="btn btn-outline-primary" aria-label="Save Doctor">Save Doctor</button>
                     </form>
                 </div>
             </div>

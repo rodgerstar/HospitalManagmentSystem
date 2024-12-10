@@ -23,8 +23,10 @@ urlpatterns = [
     path('', views.dashboard, name='dashboard'),
     path('doctors', views.doctors, name='doctors'),
     path('patients', views.patients, name='patients'),
+    path('add/doctor', views.add_doctor, name='add_doctor'),
     path('add/patient', views.add_patient, name='add_patient'),
     path('patient-details/<int:patient_id>', views.patient_detail, name='patient_detail'),
     path('patient/delete/<int:patient_id>', views.delete_patient, name='delete_patient'),
+    path('patient/delete/<int:doctor_id>', views.delete_doctor, name='delete_doctor'),
     path('admin/', admin.site.urls),
 ]

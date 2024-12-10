@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 
+from main.app_forms import PatientForm, DoctorForm
 from main.models import Patient, Doctor
 
 
@@ -24,8 +25,18 @@ def patient_detail(request, patient_id):
 
 
 def add_patient(request):
+    form = PatientForm()
+    return render(request, 'patient_form.html', {'form': form})
+
+
+def delete_patient(request, patient_id):
     return None
 
 
-def delete_patient(request):
+def add_doctor(request):
+    form = DoctorForm()
+    return render(request, 'doctor_form.html', {'form': form})
+
+
+def delete_doctor(request, doctor_id):
     return None
