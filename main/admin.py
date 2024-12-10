@@ -33,7 +33,7 @@ class InvoiceAdmin(admin.ModelAdmin):
     list_per_page = 30
 
 class DepartmentAdmin(admin.ModelAdmin):
-    list_display = ['doctor', 'qualifications', 'age']
+    list_display = ['name', 'description']
 
 
 admin.site.register(Patient, PatientAdmin)

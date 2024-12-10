@@ -28,6 +28,7 @@
                         <th>Gender</th>
                         <th>Diagnosis</th>
                         <th>Address</th>
+                        <th>Patient Details</th>
                         <th>Medical Records</th>
                         <th>Delete</th>
                     </tr>
@@ -39,6 +40,7 @@
                         <th>Gender</th>
                         <th>Diagnosis</th>
                         <th>Address</th>
+                        <th>Patient Details</th>
                         <th>Medical Records</th>
                         <th>Delete</th>
                     </tr>
@@ -54,6 +56,10 @@
                             <td>
                                 <a href="{% url 'patient_detail' patient_id=d.id %}"
                                    class="btn btn-outline-info btn-sm">View</a>
+                            </td>
+                            <td>
+                                <a href="{% url 'add_medical_record' patient_id=d.id %}"
+                                class="btn btn-outline-primary btn-sm">Add</a>>
                             </td>
                             <td>
                                 <form method="post" action="{% url 'delete_patient' patient_id=d.id %}">
