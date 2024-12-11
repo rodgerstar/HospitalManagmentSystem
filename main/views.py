@@ -3,8 +3,8 @@ import random
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 
-from main.app_forms import PatientForm, DoctorForm, MedicalRecordForm
-from main.models import Patient, Doctor, Appointment
+from main.app_forms import PatientForm, DoctorForm, MedicalRecordForm, InvoiceForm
+from main.models import Patient, Doctor, Appointment, Invoice
 
 
 # Create your views here.
@@ -61,7 +61,8 @@ def delete_patient(request, patient_id):
 def delete_doctor(request, doctor_id):
     doctor = get_object_or_404(Doctor, id=doctor_id)
     doctor.delete()
-    messages.error(request, f'Doctor{doctor.first_name} was successfully deleted!')
+    messages.error(request, f'Doctor {doctor.first_name} was successfully deleted!')
+
     return redirect('doctors')
 
 
@@ -70,7 +71,8 @@ def add_doctor(request):
         form = DoctorForm( request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, f'Doctor {form.cleaned_data['first_name']} was successfully added!')
+            messages.success(request, f'Doctor {form.cleaned_data["first_name"]} was successfully added!')
+
             return redirect('doctors')
     else:
         form = DoctorForm()
@@ -114,7 +116,7 @@ def book_appointment(request, patient_id):
         return HttpResponse("No doctors available for appointment.", status=404)
 
     # Randomly select a doctor
-    doctor = random.choice(doctor)
+    doctor = random.choice(doctors)
 
     # Create an appointment
     appointment = Appointment.objects.create(patient=patient, doctor=doctor)
@@ -123,3 +125,32 @@ def book_appointment(request, patient_id):
     return render(request, 'appointment_success.html', {
         'appointment': appointment,
     })
+
+
+def create_invoice(request, patient_id=None):
+    patient = get_object_or_404(Patient, id=patient_id) if patient_id else None
+
+    if request.method == 'POST':
+        form = InvoiceForm(request.POST, patient=patient)
+        if form.is_valid():
+            form.save()
+            return redirect('patients')  # Redirect to the invoice list or success page
+    else:
+        form = InvoiceForm(patient=patient)
+
+    context = {
+        'form': form,
+        'patient': patient,
+    }
+    return render(request, 'create_invoice.html', context)
+
+
+def pay_bills(request, id):
+    invoice = Invoice.objects.get(id=id)
+    patient = invoice.patient
+
+    phone_number = patient.phone_number
+    amount = invoice.amount
+    account_reference = f"INV-{invoice.id}"
+    transaction_desc = "Payment for services"
+    return None

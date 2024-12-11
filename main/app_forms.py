@@ -1,5 +1,5 @@
 from django import forms
-from main.models import Patient, Doctor, MedicalRecord
+from main.models import Patient, Doctor, MedicalRecord, Invoice
 
 
 class PatientForm(forms.ModelForm):
@@ -73,3 +73,21 @@ class MedicalRecordForm(forms.ModelForm):
         model = MedicalRecord
         fields = ['diagnosis', 'prescription','notes', 'doctor']
 
+
+class InvoiceForm(forms.ModelForm):
+    class Meta:
+        model = Invoice
+        fields = ['patient', 'amount', 'description']
+        widgets = {
+            'amount': forms.NumberInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+            'status': forms.Select(attrs={'class': 'form-control'}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        patient = kwargs.pop('patient', None)  # Extract patient if provided
+        super().__init__(*args, **kwargs)
+        if patient:
+            self.fields['patient'].queryset = Patient.objects.filter(id=patient.id)
+            self.fields['patient'].initial = patient
+            self.fields['patient'].widget.attrs.update({'readonly': 'readonly'})

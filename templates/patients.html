@@ -30,6 +30,7 @@
                         <th>Address</th>
                         <th>Patient Details</th>
                         <th>Medical Records</th>
+                        <th>Invoice</th>
                         <th>Delete</th>
                     </tr>
                     </thead>
@@ -42,6 +43,7 @@
                         <th>Address</th>
                         <th>Patient Details</th>
                         <th>Medical Records</th>
+                        <th>Invoice</th>
                         <th>Delete</th>
                     </tr>
                     </tfoot>
@@ -61,7 +63,10 @@
                                 <a href="{% url 'add_medical_record' patient_id=d.id %}"
                                    class="btn btn-outline-primary btn-sm">Add</a>
                             </td>
-                            
+                            <td>
+                                <a href="{% url 'create_invoice' patient_id=d.id %}"
+                                   class="btn btn-outline-success btn-sm">Create</a>
+                            </td>
                             <td>
                                 <form method="post" action="{% url 'delete_patient' patient_id=d.id %}">
                                     {% csrf_token %}
