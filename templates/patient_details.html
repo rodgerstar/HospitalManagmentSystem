@@ -34,10 +34,6 @@
                         <td class="h6">Address</td>
                         <td>{{ patient.address }}</td>
                     </tr>
-                    <tr>
-                        <td class="h6">Diagnosis</td>
-                        <td>{{ patient.diagnosis }}</td>
-                    </tr>
                 </table>
             </div>
         </div>
@@ -77,7 +73,7 @@
     {% endif %}
 
     <div class="mt-4">
-        <a href="{% url 'patients' %}" class="btn btn-outline-dark">Go Back</a>
+        <a href="{% url 'patients' %}" class="btn btn-outline-dark">Done</a>
     </div>
 
 </div>

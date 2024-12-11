@@ -92,7 +92,7 @@ class Doctor(models.Model):
     class Meta:
         verbose_name = 'Doctor'
         verbose_name_plural = 'Doctors'
-        ordering = ['first_name', 'last_name']
+        ordering = ['-created_at']
         db_table = 'Doctors'
 
 

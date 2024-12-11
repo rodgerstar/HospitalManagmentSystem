@@ -1,16 +1,23 @@
+import random
+
+from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 
 from main.app_forms import PatientForm, DoctorForm, MedicalRecordForm
-from main.models import Patient, Doctor
+from main.models import Patient, Doctor, Appointment
 
 
 # Create your views here.
 def dashboard(request):
-    return render(request, 'dashboard.html')
+    appointments = Appointment.objects.all()  # You can filter this as needed
+    context = {
+        'appointments': appointments,
+    }
+    return render(request, 'dashboard.html', context)
 
 
 def patients(request):
-    data = Patient.objects.all()
+    data = Patient.objects.all().order_by('-id').values()
     return render(request, 'patients.html', {'data': data})
 
 
@@ -38,6 +45,7 @@ def add_patient(request):
         form = PatientForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, f'Patient {form.cleaned_data['first_name']} was successfully added!')
             return redirect('patients')
     else:
         form = PatientForm()
@@ -47,11 +55,13 @@ def add_patient(request):
 def delete_patient(request, patient_id):
     patient = get_object_or_404(Patient, id=patient_id)
     patient.delete()
+    messages.error(request, f'Patient {patient.first_name} was successfully deleted!')
     return redirect('patients')
 
 def delete_doctor(request, doctor_id):
     doctor = get_object_or_404(Doctor, id=doctor_id)
     doctor.delete()
+    messages.error(request, f'Doctor{doctor.first_name} was successfully deleted!')
     return redirect('doctors')
 
 
@@ -60,14 +70,13 @@ def add_doctor(request):
         form = DoctorForm( request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, f'Doctor {form.cleaned_data['first_name']} was successfully added!')
             return redirect('doctors')
     else:
         form = DoctorForm()
     return render(request, 'doctor_form.html', {'form': form})
 
 
-def delete_doctor(request, doctor_id):
-    return None
 
 
 def add_medical_record(request, patient_id):
@@ -78,6 +87,7 @@ def add_medical_record(request, patient_id):
             medical_record = form.save(commit=False)
             medical_record.patient = patient
             medical_record.save()
+            messages.success(request, f'Medical record  for patient was successfully added!')
             return redirect('patient_detail', patient_id=patient.id)
     else:
         form = MedicalRecordForm()
@@ -88,8 +98,28 @@ def doctor_detail(request, doctor_id):
     doctor = get_object_or_404(Doctor, id=doctor_id)
     return render(request, 'doctors_detail.html', {'doctor': doctor})
 
-def dashboard(request):
-    context = {
-        'user': request.user  # Pass the logged-in user
-    }
-    return render(request, 'master.html', context)
+
+import random
+from django.shortcuts import get_object_or_404, redirect, render
+from django.http import HttpResponse
+from .models import Patient, Doctor, Appointment
+
+def book_appointment(request, patient_id):
+    # Fetch the patient by their ID
+    patient = get_object_or_404(Patient, id=patient_id)
+
+    # Get a list of all doctors
+    doctor = list(Doctor.objects.all())
+    if not doctors:
+        return HttpResponse("No doctors available for appointment.", status=404)
+
+    # Randomly select a doctor
+    doctor = random.choice(doctor)
+
+    # Create an appointment
+    appointment = Appointment.objects.create(patient=patient, doctor=doctor)
+
+    # Use the appointment variable in the response
+    return render(request, 'appointment_success.html', {
+        'appointment': appointment,
+    })
