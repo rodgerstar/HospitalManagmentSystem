@@ -1,0 +1,34 @@
+.dynamic-button {
+    border-radius: 20px; /* Creates a pill-shaped button */
+    padding: 10px 20px; /* Adjust padding to fit the content */
+    display: inline-flex; /* Keeps content aligned properly */
+    align-items: center; /* Centers content vertically */
+    justify-content: center; /* Centers content horizontally */
+    white-space: nowrap; /* Prevents text wrapping */
+}
+
+.btn-circle {
+    border-radius: 50%;              /* Ensures it's a circle */
+    padding: 10px 15px;              /* Adjust padding for the circle size */
+    font-size: 10px;                 /* Adjust font size to fit longer words */
+    min-width: 60px;                 /* Ensures minimum width for the button */
+    height: 60px;                   /* Makes the height the same as width for perfect circle */
+    display: flex;
+    justify-content: center;        /* Centering the text horizontally */
+    align-items: center;            /* Centering the text vertically */
+    white-space: nowrap;            /* Prevent text from wrapping */
+}
+
+.dropdown-toggle {
+    text-align: center;
+}
+
+.dropdown-menu {
+    border-radius: 5px;             /* Optional: rounded corners for the dropdown */
+    padding: 0;
+}
+
+.dropdown-menu li {
+    padding: 5px 10px;              /* Adds padding for better spacing of menu items */
+}
+
