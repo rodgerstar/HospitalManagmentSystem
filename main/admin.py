@@ -1,7 +1,7 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
 
-from main.models import Patient, Doctor, Appointment, MedicalRecord, Invoice, Department
-
+from main.models import Patient, Doctor, Appointment, MedicalRecord, Invoice, Department, User
 
 # Register your models here.
 admin.site.site_header = 'MOH ms'
@@ -35,7 +35,16 @@ class InvoiceAdmin(admin.ModelAdmin):
 class DepartmentAdmin(admin.ModelAdmin):
     list_display = ['name', 'description']
 
+class CustomUserAdmin(UserAdmin):
+    model = User
+    list_display = ['username', 'email', 'first_name', 'last_name', 'role']
+    list_filter = ['role']
+    search_fields = ['username', 'email']
 
+
+
+
+admin.site.register(User, CustomUserAdmin)
 admin.site.register(Patient, PatientAdmin)
 admin.site.register(Doctor, DoctorAdmin)
 admin.site.register(Appointment, AppointmentAdmin)

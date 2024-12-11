@@ -46,11 +46,13 @@ class DoctorForm(forms.ModelForm):
             'email',
             'department',
             'gender',
+            'dob',
             'phone_number',
             'med_reg_num'
         ]
         widgets = {
             'email': forms.EmailInput(attrs={'placeholder': 'doctor@example.com'}),
+            'dob': forms.DateInput(attrs={'type': 'date'}),
         }
         labels = {
             'first_name': 'First Name',

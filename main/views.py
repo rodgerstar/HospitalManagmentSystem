@@ -34,16 +34,35 @@ def patient_detail(request, patient_id):
 
 
 def add_patient(request):
-    form = PatientForm()
+    if request.method == 'POST':
+        form = PatientForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('patients')
+    else:
+        form = PatientForm()
     return render(request, 'patient_form.html', {'form': form})
 
 
 def delete_patient(request, patient_id):
-    return None
+    patient = get_object_or_404(Patient, id=patient_id)
+    patient.delete()
+    return redirect('patients')
+
+def delete_doctor(request, doctor_id):
+    doctor = get_object_or_404(Doctor, id=doctor_id)
+    doctor.delete()
+    return redirect('doctors')
 
 
 def add_doctor(request):
-    form = DoctorForm()
+    if request.method == 'POST':
+        form = DoctorForm( request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('doctors')
+    else:
+        form = DoctorForm()
     return render(request, 'doctor_form.html', {'form': form})
 
 
@@ -68,3 +87,9 @@ def add_medical_record(request, patient_id):
 def doctor_detail(request, doctor_id):
     doctor = get_object_or_404(Doctor, id=doctor_id)
     return render(request, 'doctors_detail.html', {'doctor': doctor})
+
+def dashboard(request):
+    context = {
+        'user': request.user  # Pass the logged-in user
+    }
+    return render(request, 'master.html', context)

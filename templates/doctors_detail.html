@@ -23,7 +23,7 @@
                         <td>{{ doctor.last_name }}</td>
                     </tr>
                     <tr>
-                        <td class="h6">Phone Number</td>
+                        <td class="h6">Email</td>
                         <td>{{ doctor.email }}</td>
                     </tr>
                     <tr>
@@ -31,11 +31,11 @@
                         <td>{{ doctor.gender }}</td>
                     </tr>
                     <tr>
-                        <td class="h6">Address</td>
+                        <td class="h6">Department</td>
                         <td>{{ doctor.department }}</td>
                     </tr>
                     <tr>
-                        <td class="h6">Reg. No/td>
+                        <td class="h6">Reg. No</td>
                         <td>{{ doctor.med_reg_num }}</td>
                     </tr>
                      <tr>
@@ -71,5 +71,9 @@
             </tbody>
         </table>
     {% endif %}
+
+    <div class="mt-4">
+        <a href="{% url 'doctors' %}" class="btn btn-outline-dark">Done</a>
+    </div>
 </div>
 {% endblock %}

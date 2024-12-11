@@ -59,8 +59,9 @@
                             </td>
                             <td>
                                 <a href="{% url 'add_medical_record' patient_id=d.id %}"
-                                class="btn btn-outline-primary btn-sm">Add</a>>
+                                   class="btn btn-outline-primary btn-sm">Add</a>
                             </td>
+                            
                             <td>
                                 <form method="post" action="{% url 'delete_patient' patient_id=d.id %}">
                                     {% csrf_token %}

@@ -1,10 +1,18 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 # Gender choices for consistency
 GENDER_CHOICES = [
     ('Male', 'Male'),
     ('Female', 'Female'),
     ('Other', 'Other'),
+]
+
+ROLE_CHOICES = [
+    ('HR', 'Human Resources'),
+    ('ADMIN', 'Administrator'),
+    ('DOCTOR', 'Doctor'),
+    # Add more roles here as necessary
 ]
 
 # Status choices for appointments and invoices
@@ -144,3 +152,12 @@ class Invoice(models.Model):
         verbose_name_plural = 'Invoices'
         ordering = ['-created_at']
         db_table = 'Invoices'
+
+
+
+class User(AbstractUser):
+    profile_picture = models.ImageField(upload_to='profile_pics/', null=True, blank=True)
+    role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='ADMIN')
+
+    def __str__(self):
+        return self.username

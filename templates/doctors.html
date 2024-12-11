@@ -26,11 +26,9 @@
                         <th>First name</th>
                         <th>Last name</th>
                         <th>Gender</th>
-                        <th>Email</th>
                         <th>Department</th>
                         <th>reg_num</th>
                         <th>Doctor Info</th>
-                        <th>Add Medic</th>
                         <th>Delete</th>
                     </tr>
                     </thead>
@@ -39,11 +37,9 @@
                         <th>First name</th>
                         <th>Last name</th>
                         <th>Gender</th>
-                        <th>Email</th>
                         <th>Department</th>
                         <th>reg_num</th>
                         <th>Doctor Info</th>
-                        <th>Add Medic</th>
                         <th>Delete</th>
                     </tr>
                     </tfoot>
@@ -53,17 +49,13 @@
                                 <td>{{ medic.first_name }}</td>
                                 <td>{{ medic.last_name }}</td>
                                 <td>{{ medic.gender }}</td>
-                                <td>{{ medic.email }}</td>
                                 <td>{{ medic.department }}</td>
                                 <td>{{ medic.med_reg_num}}</td>
                                 <td>
                                     <a href="{% url 'doctor_detail' doctor_id=medic.id %}" class="btn btn-outline-info btn-sm">View</a>
                                 </td>
                                 <td>
-                                    <a href="{% url 'add_doctor' %}" class="btn btn-outline-primary btn-sm">Add Medic</a>
-                                </td>
-                                <td>
-                                    <a href="#" class="btn btn-outline-danger btn-sm">Delete</a>
+                                    <a href="{% url 'delete_doctor' doctor_id=medic.id%} " class="btn btn-outline-danger btn-sm">Delete</a>
                                 </td>
                                 
                             </tr>

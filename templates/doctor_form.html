@@ -8,8 +8,7 @@
 {% block content %}
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-sm-4">
-                <div class="card border-primary mb-3 p-3 shadow-sm">
+            <div class="col-sm-4 bg-white shadow p-3 mb-5 bg-white rounded border-left-primary">
                     <h3 class="text-center text-primary">Add New Medic Personnel</h3>
                     {% if form.errors %}
                         <div class="alert alert-danger">
@@ -21,7 +20,7 @@
                         {{ form | crispy }}
                         <button class="btn btn-outline-primary" aria-label="Save Doctor">Save Doctor</button>
                     </form>
-                </div>
+                
             </div>
         </div>
     </div>
