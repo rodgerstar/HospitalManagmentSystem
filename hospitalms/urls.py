@@ -21,17 +21,21 @@ from main import views
 
 urlpatterns = [
     path('', views.dashboard, name='dashboard'),
+    path('invoices', views.all_invoices, name='all_invoices'),
     path('doctors', views.doctors, name='doctors'),
     path('patients', views.patients, name='patients'),
     path('add/doctor', views.add_doctor, name='add_doctor'),
     path('add/patient', views.add_patient, name='add_patient'),
     path('patient-details/<int:patient_id>', views.patient_detail, name='patient_detail'),
     path('doctor-details/<int:doctor_id>', views.doctor_detail, name='doctor_detail'),
-    path('pay/<int:id>', views.pay_bills, name='pay_bills'),
+    path('pay/<int:patient_id>', views.pay_bills, name='pay_bills'),
     path('invoices/create/<int:patient_id>/', views.create_invoice, name='create_invoice'),
     path('book-appointment/<int:patient_id>', views.book_appointment, name='book_appointment'),
+    path('handle/payment/transactions', views.callback, name='callback'),
     path('patient/<int:patient_id>/add_record/', views.add_medical_record, name='add_medical_record'),
     path('patient/delete/<int:patient_id>', views.delete_patient, name='delete_patient'),
     path('patient/delete/<int:doctor_id>', views.delete_doctor, name='delete_doctor'),
+    path('login', views.login_page, name='login'),
+    path('logout', views.logout_page, name='logout'),
     path('admin/', admin.site.urls),
 ]

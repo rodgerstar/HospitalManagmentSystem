@@ -6,42 +6,44 @@
 {% endblock %}
 
 {{% block content %}
-<div class="container mt-5">
-    <div class="card border-left-primary shadow mb-5">
-        <div class="card-header">
-            <h3>Create Invoice</h3>
-        </div>
-        <div class="card-body">
-            <form method="post">
-                {% csrf_token %}
-                {{ form|crispy }}
-                <button type="submit" class="btn btn-primary mt-3">Complete Payment</button>
-            </form>
-{#            <hr>#}
-{#            <h5>Patient Information</h5>#}
-{#            <div id="patient-info">#}
-{#                <p>Select a patient to see details.</p>#}
-{#            </div>#}
+    <div class="container mt-5">
+        <div class="card border-left-primary shadow mb-5">
+            <div class="card-header">
+                <h3>Create Invoice</h3>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <a href="{% url 'pay_bills' patient_id=patient.id %}">
+                        <button type="submit" class="btn btn-primary mt-3">Complete Payment</button>
+                    </a>
+                </form>
+                {#            <hr>#}
+                {#            <h5>Patient Information</h5>#}
+                {#            <div id="patient-info">#}
+                {#                <p>Select a patient to see details.</p>#}
+                {#            </div>#}
+            </div>
         </div>
     </div>
-</div>
 
-<script>
-    const patientDropdown = document.querySelector('#id_patient');
-    const patientInfoDiv = document.querySelector('#patient-info');
+    <script>
+        const patientDropdown = document.querySelector('#id_patient');
+        const patientInfoDiv = document.querySelector('#patient-info');
 
-    // Update patient information when a patient is selected
-    patientDropdown.addEventListener('change', function () {
-        const patientId = this.value;
-        fetch(`/patients/info/${patientId}`)  // Replace with your actual URL
-            .then(response => response.json())
-            .then(data => {
-                patientInfoDiv.innerHTML = `
+        // Update patient information when a patient is selected
+        patientDropdown.addEventListener('change', function () {
+            const patientId = this.value;
+            fetch(`/patients/info/${patientId}`)  // Replace with your actual URL
+                .then(response => response.json())
+                .then(data => {
+                    patientInfoDiv.innerHTML = `
                     <p><strong>Name:</strong> ${data.first_name} ${data.last_name}</p>
                     <p><strong>Phone:</strong> ${data.phone_number}</p>
                     <p><strong>Address:</strong> ${data.address}</p>
                 `;
-            });
-    });
-</script>
+                });
+        });
+    </script>
 {% endblock %}

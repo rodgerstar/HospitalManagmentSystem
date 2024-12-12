@@ -59,7 +59,7 @@ function smallchart1() {
         "sep",
       ],
       title: {
-        text: "Expense",
+        text: "Count",
         style: {
           color: "#9aa0ac",
         },
@@ -72,7 +72,7 @@ function smallchart1() {
     },
     yaxis: {
       title: {
-        text: "Income",
+        text: "Chronic Infections",
         style: {
           color: "#9aa0ac",
         },
@@ -112,11 +112,11 @@ function smallchart2() {
   var options = {
     series: [
       {
-        name: "Net Profit",
+        name: "Adult",
         data: [44, 55, 57, 56, 61, 58],
       },
       {
-        name: "Revenue",
+        name: "Kids",
         data: [76, 85, 101, 98, 87, 105],
       },
     ],
@@ -161,7 +161,7 @@ function smallchart2() {
     },
     yaxis: {
       title: {
-        text: "$ (thousands)",
+        text: "Patient Demographic",
         style: {
           color: "#9aa0ac",
         },

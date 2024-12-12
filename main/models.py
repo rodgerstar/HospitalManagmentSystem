@@ -161,3 +161,23 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username
+
+
+class Payment(models.Model):
+    transaction = models.ForeignKey(Invoice, on_delete=models.CASCADE)
+    merchant_request_id = models.CharField(max_length=100)
+    checkout_request_id = models.CharField(max_length=100)
+    code = models.CharField(max_length=100, null=True)
+    amount = models.IntegerField()
+    status = models.CharField(max_length=40, default='Pending')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'Payment'
+        verbose_name_plural = 'Payments'
+        ordering = ['-created_at']
+        db_table = 'Payments'
+
+    def __str__(self):
+        return f"{self.code}-{self.status}-{self.amount}"

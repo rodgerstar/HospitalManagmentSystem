@@ -25,7 +25,7 @@
     <link href="{% static 'css/theme-color.css' %}" rel="stylesheet" type="text/css"/>
 
     <!-- favicon -->
-    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}"/>
+{#    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}"/>#}
 {% endblock %}
 {% block content %}
     <div class="page-content-wrapper">
@@ -83,13 +83,13 @@
 									<span class="info-box-icon push-bottom"><i
                                             class="material-icons">content_cut</i></span>
                         <div class="info-box-content">
-                            <span class="info-box-text">Operations</span>
+                            <span class="info-box-text">Admitted</span>
                             <span class="info-box-number">52</span>
                             <div class="progress">
                                 <div class="progress-bar" style="width: 85%"></div>
                             </div>
                             <span class="progress-description">
-											85% Increase in 28 Days
+											85% Decrease last 28 Days
 										</span>
                         </div>
                         <!-- /.info-box-content -->
@@ -124,7 +124,7 @@
             <div class="col-md-8">
                 <div class="card card-box">
                     <div class="card-head">
-                        <header>HOSPITAL SURVEY</header>
+                        <header>CHRONIC DISEASE(count)</header>
                         <div class="tools">
                             <a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
                             <a class="t-collapse btn-color fa fa-chevron-down" href="javascript:;"></a>
@@ -141,7 +141,7 @@
             <div class="col-md-4">
                 <div class="card card-box">
                     <div class="card-head">
-                        <header>HOSPITAL SURVEY</header>
+                        <header>PATIENT DEMOGRAPHIC(count by age)</header>
                         <div class="tools">
                             <a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
                             <a class="t-collapse btn-color fa fa-chevron-down" href="javascript:;"></a>

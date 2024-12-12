@@ -32,3 +32,12 @@
     padding: 5px 10px;              /* Adds padding for better spacing of menu items */
 }
 
+
+/*body {*/
+/*    background-image: url("{% static 'login_assets/images/bg.jpg' %}");*/
+/*    background-size: cover;*/
+/*    background-position: center;*/
+/*    background-repeat: no-repeat;*/
+/*}*/
+
+
