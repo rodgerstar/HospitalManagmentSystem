@@ -126,45 +126,53 @@ def book_appointment(request, patient_id):
 
 @login_required
 # @permission_required('main.add_invoice', raise_exception=True)
-def create_invoice(request, patient_id=None):
-    patient = get_object_or_404(Patient, id=patient_id) if patient_id else None
+def create_invoice(request, patient_id):
+    patient = get_object_or_404(Patient, id=patient_id)
     if request.method == 'POST':
         form = InvoiceForm(request.POST)
         if form.is_valid():
-            form.save()
+            amount = form.save(commit=False)
+            amount.patient = patient
+            amount.save()
             messages.success(request, "Invoice created successfully!")
-            return redirect('patients')
+            return redirect('all_invoices')
     else:
         form = InvoiceForm()
     return render(request, 'create_invoice.html', {'form': form, 'patient': patient})
 
-
 @login_required
 # @permission_required('main.add_payment', raise_exception=True)
+@login_required
 def pay_bills(request, patient_id):
-    invoice = get_object_or_404(Invoice, patient_id=patient_id)
-    cl = MpesaClient()
-    phone_number = invoice.patient.phone_number
-    amount = invoice.amount
-    response = cl.stk_push(
-        phone_number=phone_number,
-        amount=amount,
-        account_reference=invoice.patient.first_name,
-        transaction_desc='Bill Payment',
-        callback_url='https://your-callback-url.example.com'
-    )
-    if response.response_code == '0':
-        Payment.objects.create(
-            transaction=invoice,
-            merchant_request_id=response.merchant_request_id,
-            checkout_request_id=response.checkout_request_id,
-            amount=amount
-        )
-        messages.success(request, "Payment successfully triggered!")
-    else:
-        messages.error(request, "Payment failed to trigger.")
-    return redirect('patients')
+    invoices = Invoice.objects.filter(patient_id=patient_id, status='Unpaid')
+    if not invoices.exists():
+        messages.error(request, "No unpaid invoices found for this patient.")
+        return redirect('patients')
 
+    for invoice in invoices:
+        cl = MpesaClient()
+        response = cl.stk_push(
+            phone_number='0758023590',
+            amount= 1,  # Testing amount
+            account_reference=invoice.patient.first_name,
+            transaction_desc='Bill Payment',
+            callback_url='https://your-callback-url.example.com'
+        )
+
+        if response.response_code == '0':
+            Payment.objects.create(
+                transaction=invoice,
+                merchant_request_id=response.merchant_request_id,
+                checkout_request_id=response.checkout_request_id,
+                amount='1'  # Testing amount
+            )
+            invoice.status = 'Payment Triggered'
+        else:
+            invoice.status = 'Payment Failed'
+        invoice.save()
+
+    messages.success(request, "Payment triggered for all unpaid invoices.")
+    return redirect('all_invoices')
 
 @csrf_exempt
 def callback(request):
@@ -178,6 +186,11 @@ def callback(request):
             transaction = Payment.objects.get(merchant_request_id=merchant_id, checkout_request_id=checkout_id)
             transaction.code = code
             transaction.save()
+
+            # Update invoice status to "Paid"
+            invoice = transaction.transaction
+            invoice.status = 'Paid'
+            invoice.save()
     except KeyError:
         return HttpResponse("Invalid data received", status=400)
     return HttpResponse("OK")

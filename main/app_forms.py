@@ -77,7 +77,7 @@ class MedicalRecordForm(forms.ModelForm):
 class InvoiceForm(forms.ModelForm):
     class Meta:
         model = Invoice
-        fields = ['patient', 'amount', 'description']
+        fields = ['amount', 'description', 'status']
         widgets = {
             'amount': forms.NumberInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
