@@ -10,9 +10,14 @@
 {% endblock %}
 
 {% block content %}
-    <h1 class="h3 mb-2 text-gray-800 ">Patients Information</h1>
-
-
+    <div class="d-flex justify-content-between align-items-center">
+        <h1 class="h3 mb-2 text-decoration text-primary">Patients Information:</h1>
+        <h2 class="h3 mb-2 ">
+            <a href="{% url 'dashboard' %}" class="text-decoration text-primary text d-flex align-items-center text-decoration-underline">
+                <i class="fas fa-home">  Dashboard</i>
+            </a>
+        </h2>
+    </div>
     <!-- DataTales Example -->
     <div class="card shadow mb-4 border-left-primary">
         <div class="card-header py-3">
@@ -26,10 +31,10 @@
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Gender</th>
-                        <th>Diagnosis</th>
+{#                        <th>Diagnosis</th>#}
                         <th>Address</th>
-                        <th>Patient Details</th>
-                        <th>Medical Records</th>
+                        <th>Patient Info.</th>
+                        <th>Med. Records</th>
                         <th>Invoice</th>
                         <th>Delete</th>
                     </tr>
@@ -39,10 +44,10 @@
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Gender</th>
-                        <th>Diagnosis</th>
+{#                        <th>Diagnosis</th>#}
                         <th>Address</th>
-                        <th>Patient Details</th>
-                        <th>Medical Records</th>
+                        <th>Patient Info</th>
+                        <th>Med. Records</th>
                         <th>Invoice</th>
                         <th>Delete</th>
                     </tr>
@@ -53,7 +58,7 @@
                             <td>{{ d.first_name }}</td>
                             <td>{{ d.last_name }}</td>
                             <td>{{ d.gender }}</td>
-                            <td>{{ d.diagnosis }}</td>
+{#                            <td>{{ d.diagnosis }}</td>#}
                             <td>{{ d.address }}</td>
                             <td>
                                 <a href="{% url 'patient_detail' patient_id=d.id %}"

@@ -15,22 +15,24 @@
                 <h3>Names : {{ patient.first_name }} {{ patient.last_name }}</h3>
                 <p>Gender :{{ patient.gender }}</p>
                 <p>Email :{{ patient.email }}</p>
-                <p>Phone Number :{{ patient.phone_number}}</p>
-                <p>Home Address :{{ patient.address}}</p>
+                <p>Phone Number :{{ patient.phone_number }}</p>
+                <p>Home Address :{{ patient.address }}</p>
                 <!-- Save Invoice Form -->
                 <form method="post" action="{% url 'create_invoice' patient_id=patient.id %}">
                     {% csrf_token %}
                     {{ form|crispy }}
                     <button type="submit" class="btn btn-success mt-3">Save Invoice</button>
+                    <button type="button" class="btn btn-dark mt-3 float-right" onclick="window.history.back()">Back
+                    </button>
                 </form>
 
                 <!-- Trigger Payment Button -->
-{#                {% if patient %}#}
-{#                    <form method="post" action="{% url 'pay_bills' patient_id=patient.id %}" class="mt-3">#}
-{#                        {% csrf_token %}#}
-{#                        <button type="submit" class="btn btn-primary">Trigger Payment</button>#}
-{#                    </form>#}
-{#                {% endif %}#}
+                {#                {% if patient %}#}
+                {#                    <form method="post" action="{% url 'pay_bills' patient_id=patient.id %}" class="mt-3">#}
+                {#                        {% csrf_token %}#}
+                {#                        <button type="submit" class="btn btn-primary">Trigger Payment</button>#}
+                {#                    </form>#}
+                {#                {% endif %}#}
             </div>
         </div>
     </div>

@@ -6,8 +6,18 @@
 {% endblock %}
 
 {% block content %}
+
     <div class="container my-4 border rounded p-3 border-left-primary">
-        <h3 class="text-primary">Patient Invoice Info:</h3>
+        <div class="d-flex justify-content-between align-items-center">
+            <h1 class="h3 mb-2 text-decoration text-primary">All Patients Payment Info :</h1>
+            <h2 class="h3 mb-2 ">
+                <a href="{% url 'dashboard' %}"
+                   class="text-decoration text-primary text d-flex align-items-center text-decoration-underline">
+                    <i class="fas fa-home"> Dashboard</i>
+                </a>
+            </h2>
+        </div>
+{#        <h3 class="text-primary">Invoice :</h3>#}
 
         <!-- Patient Details Section -->
         {% if invoices.exists %}
