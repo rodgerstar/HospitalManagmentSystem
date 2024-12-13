@@ -37,7 +37,7 @@
                         {#                        <th>Department</th>#}
                         <th>reg_num</th>
                         <th>Doctor Info</th>
-                        <th>Delete</th>
+{#                        <th>Delete</th>#}
                     </tr>
                     </thead>
                     <tfoot>
@@ -48,7 +48,7 @@
                         {#                        <th>Department</th>#}
                         <th>reg_num</th>
                         <th>Doctor Info</th>
-                        <th>Delete</th>
+{#                        <th>Delete</th>#}
                     </tr>
                     </tfoot>
                     <tbody>
@@ -63,10 +63,10 @@
                                 <a href="{% url 'doctor_detail' doctor_id=medic.id %}"
                                    class="btn btn-outline-info btn-sm">View</a>
                             </td>
-                            <td>
-                                <a href="{% url 'delete_doctor' doctor_id=medic.id %} "
-                                   class="btn btn-outline-danger btn-sm">Delete</a>
-                            </td>
+{#                            <td>#}
+{#                                <a href="{% url 'delete_doctor' doctor_id=medic.id %} "#}
+{#                                   class="btn btn-outline-danger btn-sm">Delete</a>#}
+{#                            </td>#}
 
                         </tr>
                     {% endfor %}

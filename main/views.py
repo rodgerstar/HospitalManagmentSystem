@@ -98,7 +98,7 @@ def add_medical_record(request, patient_id):
             medical_record = form.save(commit=False)
             medical_record.patient = patient
             medical_record.save()
-            messages.success(request, "Medical record was successfully added!")
+            messages.success(request, "Medical record  was successfully added!")
             return redirect('patient_detail', patient_id=patient.id)
     else:
         form = MedicalRecordForm()
@@ -152,8 +152,8 @@ def pay_bills(request, patient_id):
     for invoice in invoices:
         cl = MpesaClient()
         response = cl.stk_push(
-            phone_number='0758023590',
-            amount= 1,  # Testing amount
+            phone_number= invoice.patient.phone_number,
+            amount=int(invoice.amount),  # Testing amount
             account_reference=invoice.patient.first_name,
             transaction_desc='Bill Payment',
             callback_url='https://your-callback-url.example.com'
